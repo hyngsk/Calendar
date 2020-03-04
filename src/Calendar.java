@@ -9,17 +9,12 @@ import java.util.Collections;
 import java.util.GregorianCalendar;
 
 public class Calendar {
-
-
-    //
     static JLabel lblMonth, lblYear;
     static JButton btnPrev, btnNext, btnAddEvent, btnDelEvent;
-    //
     static JTable tblCalendar;
     static JComboBox cmbYear;
     static JFrame frmMain;
     static Container pane;
-    //
     static DefaultTableModel mtblCalendar;
     static JScrollPane stblCalendar;
     static JPanel pnlCalendar, pnlEvents, pnlAllEvents;
