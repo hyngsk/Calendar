@@ -1,9 +1,9 @@
 import java.util.Comparator;
 
-public class SortEvent implements Comparator<Event> {
+public class SortEvent implements Comparator<DataTransfer> {
 
     @Override
-    public int compare(Event o1, Event o2) {
+    public int compare(DataTransfer o1, DataTransfer o2) {
         int dayCompare = Integer.valueOf(o1.eventDay).compareTo(Integer.valueOf(o2.eventDay));
         int monthCompare = Integer.valueOf(o1.eventMonth).compareTo(Integer.valueOf(o2.eventMonth));
         int yearCompare = Integer.valueOf(o1.eventYear).compareTo(Integer.valueOf(o2.eventYear));
