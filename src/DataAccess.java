@@ -1,4 +1,5 @@
 import javax.swing.table.DefaultTableModel;
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.Vector;
 
@@ -277,5 +278,39 @@ public class DataAccess {
 					e.printStackTrace();
 				}
 		}
+	}
+
+	public boolean isthereEvent(Object value, int i, int currentYear) {
+
+		return false;
+	}
+
+	public Vector findDateHaveEvent(DataTransfer dto) {
+
+		Connection con = null;       //연결
+		PreparedStatement ps = null; //명령
+		ResultSet rs = null;         //결과
+
+
+
+		try {
+			con = getConn();
+			String sql = "select Date_format(timeset,'%d') from schedule where Date_format(timeset, '%Y%m') like (?)";
+
+			//SELECT DATE_FORMAT('2017-05-04 20:23:01', '%Y%m%d');
+			ps = con.prepareStatement(sql);
+			ps.setString(1, dto.getYearMonth());
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String timeset = rs.getString("Date_format(timeset,'%d')");
+				data.add(timeset);
+
+			}//while
+		} catch (Exception e) {
+			System.out.println(e + "이번 년도,달에 이벤트를 가진 날짜 -> 오류발생");
+		}
+
+		return data;
 	}
 }

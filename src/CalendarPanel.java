@@ -4,22 +4,23 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Vector;
 
 public class CalendarPanel extends JPanel implements ActionListener {
 
+	public static Vector<String> EventDate;
+	static int realDay, realMonth, realYear;
 	public JLabel lblMonth, lblYear;
 	public JButton btnPrev, btnNext;
 	public JComboBox cmbYear;
 	public JTable tblCalendar;
 	public DefaultTableModel Tmodel;
 	public JScrollPane TableScroll;
-
 	String[] headers = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"}; // All headers
-	static int realDay, realMonth, realYear;
 	static int currentMonth, currentYear;
-	public static boolean isCellSelected;
-	public static int selectedMonth, selectedYear, selectedDay;
+
 
 	public CalendarPanel() {
 		super(null);
@@ -91,6 +92,7 @@ public class CalendarPanel extends JPanel implements ActionListener {
 			cmbYear.addItem(String.valueOf(i));
 		}
 
+		tblCalendar.setDefaultRenderer(tblCalendar.getColumnClass(0), new CalendarTableRenderer());
 		refreshCalendar(realMonth, realYear);
 
 	}
@@ -99,6 +101,13 @@ public class CalendarPanel extends JPanel implements ActionListener {
 
 		String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 		int nod, som; // Number Of Days, Start Of Month
+
+		//memoization to find date which has event
+		DataAccess dao = new DataAccess();
+		DataTransfer dto = new DataTransfer();
+		dto.setEventYear(currentYear);
+		dto.setEventMonth(currentMonth + 1);
+		EventDate = dao.findDateHaveEvent(dto);
 
 
 		btnPrev.setEnabled(true);
@@ -130,7 +139,8 @@ public class CalendarPanel extends JPanel implements ActionListener {
 			Tmodel.setValueAt(i, row, column);
 		}
 
-		tblCalendar.setDefaultRenderer(tblCalendar.getColumnClass(0), new tblCalendarRenderer());
+		Tmodel.fireTableDataChanged();
+
 	}
 
 	@Override
@@ -167,47 +177,5 @@ public class CalendarPanel extends JPanel implements ActionListener {
 		}
 	}
 
-	static class tblCalendarRenderer extends DefaultTableCellRenderer {
-		public Component getTableCellRendererComponent(JTable table, Object value, boolean selected,
-		                                               boolean focused,
-		                                               int row, int column) {
-			super.getTableCellRendererComponent(table, value, selected, focused, row, column);
-
-			if (column == 0 || column == 6) { // Week-end
-				setBackground(Color.ORANGE);
-			} else { // Week
-				setBackground(Color.WHITE);
-			}
-			if (value != null) {
-				// set actual day to gray
-				if (Integer.parseInt(value.toString()) == realDay && currentMonth == realMonth && currentYear == realYear) { // Today
-					setBackground(Color.GRAY);
-				}
-//				// set days with events to yellow
-//				if (findEvent(value, currentMonth + 1, currentYear)) {
-//					setBackground(Color.YELLOW);
-//				}
-			}
-			// allows user to select date to add event to
-			if (selected && value != null) {
-				setBackground(Color.LIGHT_GRAY);
-				//events.setText(null);
-				//events.setText("");
-				selectedMonth = currentMonth + 1;
-				selectedYear = currentYear;
-				selectedDay = Integer.parseInt(value.toString());
-				//displayEvents(selectedDay, selectedMonth, selectedYear);
-				isCellSelected = true;
-
-				System.out.println(String.format("%d%02d%02d", selectedYear, selectedMonth, selectedDay));
-			}
-
-			setBorder(null);
-			setForeground(Color.BLACK);
-
-			return this;
-		}
-	}
-
-
 }
+

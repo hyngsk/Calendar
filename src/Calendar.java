@@ -271,10 +271,7 @@ public class Calendar {
         int day = Integer.parseInt(value.toString());
         boolean hasEvent = false;
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getEventDay() == day && list.get(i).getEventMonth() == month
-
-
-                    && list.get(i).getEventYear() == year) {
+            if (list.get(i).getEventDay() == day && list.get(i).getEventMonth() == month && list.get(i).getEventYear() == year) {
                 hasEvent = true;
             }
         }

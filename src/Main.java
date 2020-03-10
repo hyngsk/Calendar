@@ -11,10 +11,6 @@ public class Main extends JFrame {
 		super("Calendar");
 		System.out.println("Run Main Constructor");
 
-		//CalendarPanel CalendarPanel = new CalendarPanel();
-		//EventPanel EventPanel = ;
-		//AllEventPanel AllEventPanel = ;
-
 		//set main frame
 		setSize(670, 550);
 		pane = getContentPane();
@@ -22,8 +18,8 @@ public class Main extends JFrame {
 
 		//add panels
 		add(new CalendarPanel());
-		add(new EventPanel());
-		add(new AllEventPanel());
+		//add(new EventPanel());
+		//add(new AllEventPanel());
 
 		// Make frame visible
 		setResizable(false);
