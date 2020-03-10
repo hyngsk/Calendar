@@ -8,6 +8,7 @@ class CalendarTableRenderer extends DefaultTableCellRenderer {
 	public static boolean isCellSelected;
 	public static int selectedMonth, selectedYear, selectedDay;
 
+
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean selected,
 	                                               boolean focused,
 	                                               int row, int column) {
@@ -40,13 +41,16 @@ class CalendarTableRenderer extends DefaultTableCellRenderer {
 			selectedMonth = CalendarPanel.currentMonth + 1;
 			selectedYear = CalendarPanel.currentYear;
 			selectedDay = Integer.parseInt(value.toString());
-			//displayEvents(selectedDay, selectedMonth, selectedYear);
+			EventPanel.displayEvent(selectedDay, selectedMonth, selectedYear);
 			isCellSelected = true;
 
-			System.out.println(String.format("%d%02d%02d", selectedYear, selectedMonth, selectedDay));
+			System.out.println("render... "+String.format("%d%02d%02d", selectedYear, selectedMonth, selectedDay));
+
 		}
 		setBorder(null);
 		setForeground(Color.BLACK);
+
+
 
 		return this;
 	}

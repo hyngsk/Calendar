@@ -5,7 +5,7 @@ public class DataTransfer {
 	int eventDay, eventMonth, eventYear;
 
 	String eventName;
-	String timeset;
+	String timeset = String.format("%d%02d%02d", eventYear, eventMonth, eventDay);
 
 	Vector<String> DatehasEvent;
 
@@ -75,7 +75,7 @@ public class DataTransfer {
 
 	public String getTimeset() {
 		return timeset;
-	}
+}
 
 	public void setTimeset(String timeset) {
 		this.timeset = timeset;
