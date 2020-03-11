@@ -45,6 +45,7 @@ public class EventPanel extends JPanel implements ActionListener {
 		dto.setEventYear(yyyy);
 		dto.setEventMonth(mm);
 		dto.setEventDay(dd);
+
 		Vector data = dao.getScheduleOnDate(dto);
 
 		IntStream.range(0, data.size()).forEach(i -> {
@@ -79,7 +80,7 @@ public class EventPanel extends JPanel implements ActionListener {
 				dao.insertSchedule(dto);
 				txtData.setText("");
 			}
-
+			//cp.initCalendar();
 			cp.refreshCalendar(CalendarPanel.currentMonth, CalendarPanel.currentYear);
 			//this.refreshTxtArea(CalendarTableRenderer.selectedYear, CalendarTableRenderer.selectedMonth, CalendarTableRenderer.selectedDay);
 		}
@@ -107,8 +108,8 @@ public class EventPanel extends JPanel implements ActionListener {
 			if (!hasEvent) {
 				JOptionPane.showMessageDialog(this, "ERROR: No event on this date to be deleted");
 			}
-
-			cp.refreshCalendar(CalendarPanel.currentMonth, CalendarPanel.currentYear);
+			//cp.initCalendar();
+			//refreshCalendar(CalendarPanel.currentMonth, CalendarPanel.currentYear);
 			//this.refreshTxtArea(CalendarTableRenderer.selectedYear, CalendarTableRenderer.selectedMonth, CalendarTableRenderer.selectedDay);
 
 		}

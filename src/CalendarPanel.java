@@ -139,6 +139,7 @@ public class CalendarPanel extends JPanel implements ActionListener {
 			Tmodel.setValueAt(i, row, column);
 		}
 
+		tblCalendar.setDefaultRenderer(tblCalendar.getColumnClass(0), new CalendarTableRenderer());
 		Tmodel.fireTableDataChanged();
 
 	}

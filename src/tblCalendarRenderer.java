@@ -36,12 +36,12 @@ class CalendarTableRenderer extends DefaultTableCellRenderer {
 		// allows user to select date to add event to
 		if (selected && value != null) {
 			setBackground(Color.LIGHT_GRAY);
-			//events.setText(null);
-			//events.setText("");
+			EventPanel.EventOnDay.setText(null);
+			EventPanel.EventOnDay.setText("");
 			selectedMonth = CalendarPanel.currentMonth + 1;
 			selectedYear = CalendarPanel.currentYear;
 			selectedDay = Integer.parseInt(value.toString());
-			EventPanel.displayEvent(selectedDay, selectedMonth, selectedYear);
+			EventPanel.displayEvent(selectedYear, selectedMonth, selectedDay);
 			isCellSelected = true;
 
 			System.out.println("render... "+String.format("%d%02d%02d", selectedYear, selectedMonth, selectedDay));

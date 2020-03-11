@@ -7,10 +7,10 @@ public class DataAccess {
 	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 	private static final String URL = "jdbc:mysql://localhost:3306/example";
 	private static final String USER = "root"; //DB ID
-	private static final String PASS = "1587"; //DB 패스워드
+	private static final String PASS = "hyngsk1540"; //DB 패스워드
+	DataTransfer eList;
 	private Vector data = new Vector();
 	private Vector event = new Vector();
-	DataTransfer eList;
 
 
 	public DataAccess() {
@@ -63,20 +63,22 @@ public class DataAccess {
 
 		try {
 			con = getConn();
-			String sql = "select events from schedule where timeset like (?) order by timeset asc";
+			String sql = "select events from schedule where timeset=(?)";
 			//SELECT DATE_FORMAT('2017-05-04 20:23:01', '%Y%m%d');
+			//select events from schedule where timeset=(?) order by timeset asc
 			ps = con.prepareStatement(sql);
 			ps.setString(1, dto.getTimeset());
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				String events = rs.getString("events");
 				event.add(events);
-			}//while
+			}
 		} catch (Exception e) {
 			System.out.println(e + dto.getTimeset() + "이벤트 가져오기 -> 오류발생");
 		}
 
-		System.out.println(event);
+		System.out.println("가지고 있는 이벤트는 : "+event);
+
 		return event;
 	}
 
@@ -114,7 +116,7 @@ public class DataAccess {
 
 		try {
 			con = getConn();
-			String sql = "delete from schedule where timeset=?";
+			String sql = "delete from schedule where timeset=(?) order by timeset desc limit 1";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, date);
 			int r = ps.executeUpdate(); // 실행 -> 삭제

@@ -1,25 +1,14 @@
 import java.util.Vector;
 
 public class DataTransfer {
-
 	int eventDay, eventMonth, eventYear;
-
 	String eventName;
-	String timeset = String.format("%d%02d%02d", eventYear, eventMonth, eventDay);
-
+	String timeset;
 	Vector<String> DatehasEvent;
 
-	//    constructor
+
 	public DataTransfer() {
 		eventName = "no events entered.";
-	}
-
-	public Vector<String> getDatehasEvent() {
-		return DatehasEvent;
-	}
-
-	public void setDatehasEvent(Vector<String> datehasEvent) {
-		DatehasEvent = datehasEvent;
 	}
 
 	@Override
@@ -31,6 +20,14 @@ public class DataTransfer {
 				", eventName='" + eventName + '\'' +
 				", timeset='" + timeset + '\'' +
 				'}';
+	}
+
+	public Vector<String> getDatehasEvent() {
+		return DatehasEvent;
+	}
+
+	public void setDatehasEvent(Vector<String> datehasEvent) {
+		DatehasEvent = datehasEvent;
 	}
 
 	public String getYearMonth() {
@@ -74,8 +71,8 @@ public class DataTransfer {
 	}
 
 	public String getTimeset() {
-		return timeset;
-}
+		return timeset =String.format("%d%02d%02d", eventYear, eventMonth, eventDay);
+	}
 
 	public void setTimeset(String timeset) {
 		this.timeset = timeset;

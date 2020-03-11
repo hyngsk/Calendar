@@ -18,8 +18,8 @@ public class Main extends JFrame {
 
 		//add panels
 		add(new CalendarPanel());
-		//add(new EventPanel());
-		//add(new AllEventPanel());
+		add(new EventPanel());
+		add(new AllEventPanel());
 
 		// Make frame visible
 		setResizable(false);
